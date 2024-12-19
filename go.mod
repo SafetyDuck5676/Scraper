@@ -8,7 +8,6 @@ require (
 	github.com/PuerkitoBio/goquery v1.10.0
 	github.com/chromedp/chromedp v0.11.2
 	github.com/mattn/go-sqlite3 v1.14.24
-	github.com/olekukonko/tablewriter v0.0.5
 )
 
 require (
@@ -20,7 +19,6 @@ require (
 	github.com/gobwas/ws v1.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/mattn/go-runewidth v0.0.9 // indirect
 	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/sys v0.26.0 // indirect
 )

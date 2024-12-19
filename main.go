@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/csv"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -287,11 +288,29 @@ func countWordOccurrences(text, word string) int {
 	return strings.Count(strings.ToLower(text), strings.ToLower(word))
 }
 
+func (s *Scraper) ClearWordCountsTable() {
+	_, err := s.DB.Exec("DELETE FROM word_counts")
+	if err != nil {
+		log.Printf("Error clearing word_counts table: %s", err)
+	} else {
+		log.Println("Cleared word_counts table.")
+	}
+}
+
 func main() {
+	// Define the clear flag
+	clearTable := flag.Bool("clear", false, "Clear the word_counts table before starting")
+	flag.Parse()
+
 	scraper := NewScraper()
 
 	// Ensure tables are created
 	scraper.SetupDatabase()
+
+	// Clear the table if the flag is set
+	if *clearTable {
+		scraper.ClearWordCountsTable()
+	}
 
 	// Add target sites
 	scraper.Sites = []string{
