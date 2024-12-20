@@ -215,7 +215,7 @@ func (s *Scraper) Run() {
 	wg.Wait()
 }
 
-func (s *Scraper) ExportWordCountsToCSV(filePath string) {
+func (s *Scraper) ExportWordCountsToCSVGrouped(filePath string) {
 	file, err := os.Create(filePath)
 	if err != nil {
 		log.Fatalf("Error creating CSV file: %s", err)
@@ -226,14 +226,17 @@ func (s *Scraper) ExportWordCountsToCSV(filePath string) {
 	defer writer.Flush()
 
 	// Write CSV headers
-	writer.Write([]string{"Website", "Word", "Count"})
+	writer.Write([]string{"Site", "Words and Counts"})
 
-	// Query the database for word counts
-	rows, err := s.DB.Query("SELECT site, word, count FROM word_counts")
+	// Query data grouped by site
+	rows, err := s.DB.Query("SELECT site, word, count FROM word_counts ORDER BY site")
 	if err != nil {
 		log.Fatalf("Error querying database: %s", err)
 	}
 	defer rows.Close()
+
+	// Map to group results by site
+	siteData := make(map[string]map[string]int)
 
 	for rows.Next() {
 		var site, word string
@@ -244,10 +247,23 @@ func (s *Scraper) ExportWordCountsToCSV(filePath string) {
 			continue
 		}
 
-		writer.Write([]string{site, word, fmt.Sprintf("%d", count)})
+		// Group words by site
+		if _, exists := siteData[site]; !exists {
+			siteData[site] = make(map[string]int)
+		}
+		siteData[site][word] = count
 	}
 
-	log.Printf("Word counts exported to %s", filePath)
+	// Write grouped data to the CSV
+	for site, words := range siteData {
+		var wordCounts []string
+		for word, count := range words {
+			wordCounts = append(wordCounts, fmt.Sprintf("%s: %d", word, count))
+		}
+		writer.Write([]string{site, strings.Join(wordCounts, " | ")})
+	}
+
+	log.Printf("Grouped data exported to %s", filePath)
 }
 
 func (s *Scraper) SearchWordInSite(url string, word string) {
@@ -316,6 +332,7 @@ func main() {
 	scraper.Sites = []string{
 		"https://example.com",
 		"https://www.technologyreview.com/2024/08/30/1103385/a-new-way-to-build-neural-networks-could-make-ai-more-understandable/",
+		"https://eng.vt.edu/magazine/stories/fall-2023/ai.html",
 	}
 
 	// Search for specific words
@@ -327,5 +344,5 @@ func main() {
 	}
 
 	// Export results to a CSV file
-	scraper.ExportWordCountsToCSV("word_counts.csv")
+	scraper.ExportWordCountsToCSVGrouped("word_counts_grouped.csv")
 }
