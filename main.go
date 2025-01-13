@@ -330,13 +330,42 @@ func main() {
 
 	// Add target sites
 	scraper.Sites = []string{
-		"https://example.com",
 		"https://www.technologyreview.com/2024/08/30/1103385/a-new-way-to-build-neural-networks-could-make-ai-more-understandable/",
 		"https://eng.vt.edu/magazine/stories/fall-2023/ai.html",
+		"https://otus.ru/nest/post/1263/",
+		"https://blog.productstar.ru/kak-rabotayut-nejronnye-seti/",
+		"https://naked-science.ru/article/column/stabilnost-binarnyh-nejro",
+		"https://naked-science.ru/article/column/rezhimy-raboty-elektrodvi",
+		"https://naked-science.ru/article/column/kartinok-s-pomoshhyu-nejr",
+		"https://naked-science.ru/article/column/karbonitridov-s-pomoshhyu",
+		"https://naked-science.ru/article/column/seti-svyazannye-s-depress",
+		"https://naked-science.ru/article/physics/novaya-arhitektura-optich",
+		"https://naked-science.ru/article/interview/yandex-research",
+		"https://naked-science.ru/article/column/kompyuternoelyat-bole",
+		"https://naked-science.ru/article/column/v-niu-vse-nashli-sposob-r",
+		"https://naked-science.ru/article/column/predlozhen-sposob-udeshevleniya",
+		"https://naked-science.ru/article/chemistry/razrabotana-samoupravlyae",
+		"http://synergy-journal.ru/archive/article5125",
+		"https://viasite.ru/articles/overview/neural_network_artificial_intelligence/",
+		"https://www.kommersant.ru/doc/3495930",
+		"https://proglib.io/p/nauchnye-stati-po-ii-kotorye-stoit-prochitat-v-2020-godu-2020-10-31",
+		"https://www.simbirsoft.com/blog/tri-metoda-vizualnoy-interpretatsii-svertochnykh-neyronnykh-setey/",
+		"https://1-sept.ru/component/djclassifieds/?view=item&cid=4:publ-ssh-bf&id=2759:%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%82%D0%B5%D0%B9-%D0%B2-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8-%D0%B8-%D1%83%D1%87%D0%B5%D0%B1%D0%BD%D0%BE%D0%BC-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B5&Itemid=464",
+		"https://dzen.ru/a/Xbp256P25ACxy6JB",
+		"https://uxi.run/blog/ispolzovanie-neyronnykh-setey-dlya-raboty-s-kontentom-v-sotsialnykh-setyakh/",
+		"https://tproger.ru/articles/kakim-budet-budushhee-nejrosetej-v-2024-godu",
+		"https://gb.ru/blog/neironnye-seti/",
+		"https://k-telecom.org/articles/luchshij-drug-ili-ugroza-chelovechestvu-chto-takoe-nejroseti-kak-ih-ispolzovat-i-chego-zhdat-ot-nejronok/",
+		"http://www.neuropro.ru/papers.shtml",
+		"https://moluch.ru/archive/138/38781/",
+		"https://core.ac.uk/download/pdf/84594131.pdf",
+		"https://www.tadviser.ru/index.php/%D0%A1%D1%82%D0%B0%D1%82%D1%8C%D1%8F:%D0%9D%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8_(%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5_%D1%81%D0%B5%D1%82%D0%B8)",
+		"https://neerc.ifmo.ru/wiki/index.php?title=%D0%9D%D0%B5%D0%B9%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5_%D1%81%D0%B5%D1%82%D0%B8,_%D0%BF%D0%B5%D1%80%D1%86%D0%B5%D0%BF%D1%82%D1%80%D0%BE%D0%BD",
+		"https://habr.com/ru/articles/751340/",
 	}
 
 	// Search for specific words
-	wordsToSearch := []string{"example", "artificial"}
+	wordsToSearch := []string{"нейро", "недос"}
 	for _, site := range scraper.Sites {
 		for _, word := range wordsToSearch {
 			scraper.SearchWordInSite(site, word)
